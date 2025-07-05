@@ -2,11 +2,11 @@ import { TerminalWindow, TerminalPrompt, TypeWriter } from './TerminalWindow';
 import { useState, useEffect } from 'react';
 
 const aboutInfo = {
-  name: "John Developer",
-  role: "Full-Stack Developer",
-  location: "San Francisco, CA",
-  experience: "5+ years",
-  passion: "Building innovative web applications and exploring new technologies"
+  name: "Soumya Chakraborty",
+  role: "AI/ML Engineer & Research Intern",
+  location: "Kolkata, India",
+  experience: "2+ years",
+  passion: "Building AI-driven solutions for industrial automation and developing cutting-edge machine learning applications"
 };
 
 export const AboutTerminal = () => {

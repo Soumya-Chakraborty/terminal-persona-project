@@ -7,12 +7,12 @@ import { ContactTerminal } from '@/components/ContactTerminal';
 import terminalBg from '@/assets/terminal-bg.jpg';
 
 const welcomeAscii = `
-██████╗ ███████╗██╗   ██╗    ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ 
-██╔══██╗██╔════╝██║   ██║    ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
-██║  ██║█████╗  ██║   ██║    ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
-██║  ██║██╔══╝  ╚██╗ ██╔╝    ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║
-██████╔╝███████╗ ╚████╔╝     ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
-╚═════╝ ╚══════╝  ╚═══╝      ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ 
+███████╗ ██████╗ ██╗   ██╗███╗   ███╗██╗   ██╗ █████╗ ███████╗    ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ 
+██╔════╝██╔═══██╗██║   ██║████╗ ████║╚██╗ ██╔╝██╔══██╗██╔════╝    ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
+███████╗██║   ██║██║   ██║██╔████╔██║ ╚████╔╝ ███████║███████╗    ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
+╚════██║██║   ██║██║   ██║██║╚██╔╝██║  ╚██╔╝  ██╔══██║╚════██║    ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║
+███████║╚██████╔╝╚██████╔╝██║ ╚═╝ ██║   ██║   ██║  ██║███████║    ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
+╚══════╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ 
 `;
 
 const navigationCommands = [
@@ -95,7 +95,7 @@ const Index = () => {
                 </pre>
                 <div className="terminal-text">
                   <TypeWriter 
-                    text="Welcome to my developer portfolio terminal..."
+                    text="Welcome to Soumya Chakraborty's developer portfolio..."
                     delay={50}
                   />
                 </div>
@@ -103,7 +103,7 @@ const Index = () => {
             ) : (
               <div className="space-y-4">
                 <div className="terminal-text">
-                  <span className="text-terminal-green font-bold">Welcome to Dev Portfolio v1.0</span>
+                  <span className="text-terminal-green font-bold">Welcome to Soumya's Portfolio v1.0</span>
                 </div>
                 <div className="terminal-dim">
                   Type commands to navigate through my portfolio.
@@ -137,7 +137,7 @@ const Index = () => {
                 </div>
 
                 <div className="flex items-center mt-4">
-                  <TerminalPrompt user="visitor" host="dev-portfolio" path="~" />
+                  <TerminalPrompt user="visitor" host="soumya-portfolio" path="~" />
                   <input
                     type="text"
                     value={command}

@@ -1,11 +1,12 @@
 import { TerminalWindow, TerminalPrompt } from './TerminalWindow';
 
 const skills = [
-  { category: 'Languages', items: ['JavaScript', 'TypeScript', 'Python', 'Go', 'Rust'] },
-  { category: 'Frontend', items: ['React', 'Vue.js', 'Svelte', 'Next.js', 'Tailwind CSS'] },
-  { category: 'Backend', items: ['Node.js', 'Express', 'FastAPI', 'PostgreSQL', 'MongoDB'] },
-  { category: 'DevOps', items: ['Docker', 'Kubernetes', 'AWS', 'GitHub Actions', 'Terraform'] },
-  { category: 'Tools', items: ['Git', 'VS Code', 'Linux', 'Figma', 'Postman'] }
+  { category: 'Programming', items: ['Python', 'C', 'C#', '.NET Framework'] },
+  { category: 'AI/ML', items: ['YOLOv10', 'GANs', 'Reinforcement Learning', 'PyTorch', 'Deep Learning'] },
+  { category: 'Data Analysis', items: ['Pandas', 'NumPy', 'FFT', 'Scikit Learn', 'Matplotlib'] },
+  { category: 'Database', items: ['SQL', 'Database Management Systems'] },
+  { category: 'Cloud & Integration', items: ['Google Cloud Platform', 'SAP CPI'] },
+  { category: 'Tools', items: ['Git', 'LaTeX', 'Docker', 'Linux', 'Windows'] }
 ];
 
 export const SkillsTerminal = () => {
