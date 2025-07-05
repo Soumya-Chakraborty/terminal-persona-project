@@ -61,7 +61,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'terminal-green': 'hsl(var(--terminal-green))',
+				'terminal-green-dim': 'hsl(var(--terminal-green-dim))',
+				'terminal-white': 'hsl(var(--terminal-white))',
+				'terminal-gray': 'hsl(var(--terminal-gray))',
+				'terminal-dark': 'hsl(var(--terminal-dark))',
+				'terminal-border': 'hsl(var(--terminal-border))'
+			},
+			fontFamily: {
+				'mono': ['JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'monospace'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
