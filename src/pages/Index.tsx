@@ -135,20 +135,20 @@ const Index = () => {
                 
                 <div className="mt-8">
                   <div className="terminal-text mb-4 text-gradient-terminal font-semibold">Available commands:</div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ml-4">
+                  <div className="space-y-2 ml-4">
                     {navigationCommands.map((nav, index) => (
                       <div 
                         key={nav.command} 
                         className="command-item"
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
-                        <span className="terminal-prompt font-mono font-semibold">{nav.command}</span>
-                        <span className="terminal-dim ml-3">- {nav.description}</span>
+                        <span className="terminal-prompt font-mono font-bold">&gt; {nav.command}</span>
+                        <span className="terminal-dim ml-3"># {nav.description}</span>
                       </div>
                     ))}
                     <div className="command-item">
-                      <span className="terminal-prompt font-mono font-semibold">clear</span>
-                      <span className="terminal-dim ml-3">- Clear terminal</span>
+                      <span className="terminal-prompt font-mono font-bold">&gt; clear</span>
+                      <span className="terminal-dim ml-3"># Clear terminal</span>
                     </div>
                   </div>
                 </div>
@@ -158,8 +158,8 @@ const Index = () => {
                     <div 
                       key={index} 
                       className={`transition-all duration-300 ${
-                        line.startsWith('bash:') ? 'text-red-400 animate-pulse' : 
-                        line.startsWith('$') ? 'terminal-prompt glow' : 
+                        line.startsWith('bash:') ? 'error-text' : 
+                        line.startsWith('$') ? 'terminal-prompt' : 
                         line.startsWith('✓') ? 'text-terminal-green' : 'terminal-text'
                       }`}
                       style={{ animationDelay: `${index * 50}ms` }}
@@ -169,7 +169,7 @@ const Index = () => {
                   ))}
                 </div>
 
-                <div className="flex items-center mt-6 p-4 bg-gradient-to-r from-terminal-green/10 to-transparent rounded-lg border border-terminal-green/20">
+                <div className="flex items-center mt-6 p-4 bg-hacker-input rounded-none border border-terminal-green/30">
                   <TerminalPrompt user="visitor" host="soumya-portfolio" path="~" />
                   <input
                     type="text"
@@ -182,14 +182,14 @@ const Index = () => {
                       }
                     }}
                     disabled={isLoading}
-                    className="bg-transparent border-none outline-none terminal-text flex-1 ml-2 placeholder:text-terminal-gray/50"
+                    className="bg-transparent border-none outline-none terminal-text flex-1 ml-2 placeholder:text-terminal-gray/50 font-mono"
                     placeholder={isLoading ? "Processing..." : "Enter command..."}
                     autoFocus
                   />
                   {isLoading ? (
-                    <span className="loading-dots text-terminal-green">Loading</span>
+                    <span className="loading-dots text-terminal-green font-mono">LOADING</span>
                   ) : (
-                    <span className="cursor-blink">█</span>
+                    <span className="cursor-blink">▊</span>
                   )}
                 </div>
               </div>
@@ -213,7 +213,7 @@ const Index = () => {
       <MatrixBackground />
       
       {/* Background overlay with enhanced gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-terminal-dark/90 via-terminal-dark/80 to-terminal-dark/90"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-terminal-dark/95 via-terminal-dark/90 to-terminal-dark/95"></div>
       
       {/* Animated grid overlay */}
       <div className="absolute inset-0 opacity-5">

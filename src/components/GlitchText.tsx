@@ -11,8 +11,8 @@ export const GlitchText = ({ text, className = "" }: GlitchTextProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsGlitching(true);
-      setTimeout(() => setIsGlitching(false), 200);
-    }, 3000);
+      setTimeout(() => setIsGlitching(false), 300);
+    }, 2000 + Math.random() * 3000);
 
     return () => clearInterval(interval);
   }, []);

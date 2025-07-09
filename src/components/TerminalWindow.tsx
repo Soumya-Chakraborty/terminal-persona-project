@@ -18,9 +18,9 @@ export const TerminalWindow = ({ title = "Terminal", children, className = "" }:
     <div className={`terminal-window transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}>
       <div className="terminal-header">
         <div className="flex items-center space-x-2 z-10 relative">
-          <div className="w-3 h-3 bg-red-500 rounded-full transition-all duration-300 hover:scale-125 hover:shadow-lg hover:shadow-red-500/50"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full transition-all duration-300 hover:scale-125 hover:shadow-lg hover:shadow-yellow-500/50"></div>
-          <div className="w-3 h-3 bg-terminal-green rounded-full transition-all duration-300 hover:scale-125 hover:shadow-lg hover:shadow-terminal-green/50"></div>
+          <div className="window-button bg-terminal-red border-terminal-red"></div>
+          <div className="window-button bg-terminal-yellow border-terminal-yellow"></div>
+          <div className="window-button bg-terminal-green border-terminal-green"></div>
         </div>
         <div className="text-terminal-gray text-sm font-mono scanline">{title}</div>
         <div className="w-16"></div>
@@ -89,10 +89,10 @@ export const TerminalPrompt = ({
 
   return (
     <div className={`flex items-start space-x-1 mb-2 transition-all duration-500 ${isAnimating ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'}`}>
-      <span className="terminal-prompt glow">{user}@{host}</span>
+      <span className="terminal-prompt">{user}@{host}</span>
       <span className="terminal-text">:</span>
-      <span className="text-blue-400 transition-all duration-300 hover:text-blue-300">{path}</span>
-      <span className="terminal-prompt glow">$</span>
+      <span className="text-terminal-green">{path}</span>
+      <span className="terminal-prompt">$</span>
       {children && <span className="terminal-text ml-1">{children}</span>}
     </div>
   );

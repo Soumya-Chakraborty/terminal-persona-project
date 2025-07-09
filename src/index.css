@@ -6,60 +6,61 @@
 
 @layer base {
   :root {
-    /* Terminal Dark Theme */
-    --background: 0 0% 7%;
-    --foreground: 120 100% 85%;
+    /* Hacker Terminal Dark Theme */
+    --background: 0 0% 3%;
+    --foreground: 120 100% 75%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 120 100% 85%;
+    --card: 0 0% 5%;
+    --card-foreground: 120 100% 75%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 120 100% 85%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 120 100% 75%;
 
-    --primary: 120 100% 50%;
-    --primary-foreground: 0 0% 7%;
+    --primary: 120 100% 45%;
+    --primary-foreground: 0 0% 3%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 120 100% 85%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 120 100% 75%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 120 100% 40%;
-    --accent-foreground: 0 0% 7%;
+    --accent: 120 100% 35%;
+    --accent-foreground: 0 0% 3%;
 
-    --destructive: 0 100% 60%;
+    --destructive: 0 100% 55%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 120 100% 50%;
+    --border: 0 0% 12%;
+    --input: 0 0% 8%;
+    --ring: 120 100% 45%;
 
-    /* Terminal-specific colors */
-    --terminal-green: 120 100% 50%;
-    --terminal-green-dim: 120 100% 35%;
-    --terminal-white: 0 0% 95%;
-    --terminal-gray: 0 0% 60%;
-    --terminal-dark: 0 0% 7%;
-    --terminal-border: 0 0% 25%;
+    /* Hacker Terminal Colors */
+    --terminal-green: 120 100% 45%;
+    --terminal-green-dim: 120 100% 25%;
+    --terminal-white: 120 100% 85%;
+    --terminal-gray: 120 20% 35%;
+    --terminal-dark: 0 0% 3%;
+    --terminal-border: 120 50% 15%;
+    --terminal-red: 0 100% 50%;
+    --terminal-yellow: 60 100% 50%;
 
-    /* Enhanced Gradients */
-    --gradient-terminal: linear-gradient(135deg, hsl(var(--terminal-dark)), hsl(0 0% 12%));
-    --gradient-glow: radial-gradient(circle at center, hsl(var(--terminal-green) / 0.15), transparent);
+    /* Hacker Gradients */
+    --gradient-terminal: linear-gradient(135deg, hsl(var(--terminal-dark)), hsl(0 0% 5%));
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--terminal-green) / 0.2), transparent);
     --gradient-primary: linear-gradient(135deg, hsl(var(--terminal-green)), hsl(var(--terminal-green-dim)));
-    --gradient-border: linear-gradient(90deg, transparent, hsl(var(--terminal-green) / 0.3), transparent);
-    --gradient-hover: linear-gradient(135deg, hsl(var(--terminal-green) / 0.1), hsl(var(--terminal-green-dim) / 0.05));
+    --gradient-border: linear-gradient(90deg, transparent, hsl(var(--terminal-green) / 0.4), transparent);
+    --gradient-hacker: linear-gradient(135deg, hsl(var(--terminal-green) / 0.1), transparent);
 
-    /* Enhanced Shadows */
-    --shadow-terminal: 0 25px 50px -12px hsl(var(--terminal-green) / 0.25);
-    --shadow-glow: 0 0 40px hsl(var(--terminal-green) / 0.4);
-    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.1);
+    /* Hacker Shadows */
+    --shadow-terminal: 0 0 30px hsl(var(--terminal-green) / 0.3), 0 0 60px hsl(var(--terminal-green) / 0.1);
+    --shadow-glow: 0 0 20px hsl(var(--terminal-green) / 0.6);
+    --shadow-red: 0 0 20px hsl(var(--terminal-red) / 0.5);
 
     /* Animations */
     --transition-terminal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --cursor-blink: 1s infinite;
+    --transition-glitch: all 0.1s ease-in-out;
+    --cursor-blink: 0.8s infinite;
 
     --radius: 0.5rem;
 
@@ -131,113 +132,177 @@
   }
 }
 
-/* Enhanced Terminal Utilities */
+/* Hacker Terminal Utilities */
 @layer utilities {
   .terminal-window {
-    @apply bg-card border border-terminal-border rounded-lg overflow-hidden relative;
-    box-shadow: var(--shadow-terminal), var(--shadow-glow);
-    backdrop-filter: blur(10px);
-    transition: var(--transition-smooth);
+    @apply bg-card border border-terminal-border rounded-none overflow-hidden relative;
+    box-shadow: var(--shadow-terminal);
+    backdrop-filter: blur(5px);
+    transition: var(--transition-terminal);
+    border: 2px solid hsl(var(--terminal-green) / 0.3);
   }
   
-  .terminal-window:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: var(--shadow-terminal), 0 0 60px hsl(var(--terminal-green) / 0.6);
+  .terminal-window::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(45deg, transparent 49%, hsl(var(--terminal-green) / 0.1) 50%, transparent 51%);
+    background-size: 20px 20px;
+    animation: scan-lines 20s linear infinite;
   }
   
   .terminal-header {
     @apply bg-secondary p-3 flex items-center justify-between border-b border-terminal-border relative;
-    background: linear-gradient(135deg, hsl(var(--secondary)), hsl(0 0% 18%));
+    background: hsl(var(--terminal-dark));
+    border-bottom: 1px solid hsl(var(--terminal-green) / 0.5);
   }
   
-  .terminal-header::before {
+  .terminal-header::after {
     content: '';
-    @apply absolute inset-0 opacity-30;
+    @apply absolute bottom-0 left-0 right-0 h-px;
     background: var(--gradient-border);
+    animation: pulse-border 2s ease-in-out infinite;
   }
   
   .terminal-content {
     @apply p-6 font-mono text-sm leading-relaxed relative;
     background: var(--gradient-terminal);
+    color: hsl(var(--terminal-green));
   }
   
   .terminal-prompt {
-    @apply text-terminal-green font-semibold;
-    text-shadow: 0 0 10px hsl(var(--terminal-green) / 0.5);
-    transition: var(--transition-terminal);
-  }
-  
-  .terminal-prompt:hover {
-    text-shadow: 0 0 20px hsl(var(--terminal-green) / 0.8);
-    transform: scale(1.05);
+    @apply text-terminal-green font-bold;
+    text-shadow: 0 0 8px hsl(var(--terminal-green) / 0.8);
+    font-family: 'JetBrains Mono', monospace;
   }
   
   .terminal-text {
     @apply text-terminal-white;
-    transition: var(--transition-terminal);
+    color: hsl(var(--terminal-green) / 0.9);
   }
   
   .terminal-dim {
     @apply text-terminal-gray;
-    transition: var(--transition-terminal);
+    color: hsl(var(--terminal-green) / 0.5);
   }
   
   .cursor-blink {
-    animation: blink var(--cursor-blink) infinite, pulse 2s ease-in-out infinite;
+    animation: blink var(--cursor-blink) infinite;
     color: hsl(var(--terminal-green));
     text-shadow: 0 0 10px currentColor;
   }
   
   .terminal-glow {
     background: var(--gradient-glow);
-    animation: float 6s ease-in-out infinite;
+    animation: glow-pulse 4s ease-in-out infinite;
   }
   
   .text-gradient-terminal {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 3s ease-in-out infinite;
+    color: hsl(var(--terminal-green));
+    animation: text-glitch 3s ease-in-out infinite;
   }
 
-  /* Enhanced Interactive Elements */
+  /* Remove Highlighting Effects */
   .command-item {
-    @apply transition-all duration-300 cursor-pointer p-2 rounded-md;
-    background: linear-gradient(135deg, transparent, hsl(var(--terminal-green) / 0.05));
+    @apply p-2 rounded-none font-mono;
+    background: transparent;
+    border-left: 2px solid transparent;
+    transition: var(--transition-glitch);
   }
   
   .command-item:hover {
-    background: var(--gradient-hover);
-    transform: translateX(8px);
-    box-shadow: 0 4px 12px hsl(var(--terminal-green) / 0.3);
+    background: transparent;
+    border-left-color: hsl(var(--terminal-green) / 0.6);
+    transform: none;
+    box-shadow: none;
   }
 
-  /* Matrix Effect */
-  .matrix-bg {
-    position: fixed;
+  /* Enhanced Glitch Effects */
+  .glitch {
+    position: relative;
+    animation: glitch-main 2s infinite;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
   }
 
+  .glitch::before {
+    animation: glitch-1 0.3s infinite;
+    color: hsl(var(--terminal-red));
+    z-index: -1;
+  }
+
+  .glitch::after {
+    animation: glitch-2 0.3s infinite;
+    color: hsl(0 0% 100%);
+    z-index: -2;
+  }
+
+  /* Hacker Button Style */
+  .terminal-button {
+    @apply relative px-4 py-2 rounded-none border border-terminal-green text-terminal-green font-mono;
+    background: transparent;
+    transition: var(--transition-glitch);
+    text-shadow: 0 0 8px hsl(var(--terminal-green) / 0.6);
+  }
+
+  .terminal-button:hover {
+    background: hsl(var(--terminal-green) / 0.1);
+    box-shadow: 0 0 20px hsl(var(--terminal-green) / 0.4);
+    transform: none;
+  }
+
+  .terminal-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 49%, hsl(var(--terminal-green) / 0.1) 50%, transparent 51%);
+    background-size: 10px 10px;
+    animation: button-scan 3s linear infinite;
+    opacity: 0;
+  }
+
+  .terminal-button:hover::before {
+    opacity: 1;
+  }
+
+  /* Matrix Characters */
   .matrix-char {
     position: absolute;
     color: hsl(var(--terminal-green));
     font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    opacity: 0.7;
+    font-size: 12px;
+    opacity: 0.4;
     animation: fall linear infinite;
+    text-shadow: 0 0 5px currentColor;
   }
 
-  /* Pulse Animation for ASCII Art */
+  /* ASCII Glow */
   .ascii-glow {
-    animation: ascii-pulse 2s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px hsl(var(--terminal-green) / 0.6));
+    animation: ascii-glow 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px hsl(var(--terminal-green) / 0.8));
+  }
+
+  /* Error Text */
+  .error-text {
+    color: hsl(var(--terminal-red));
+    text-shadow: 0 0 8px hsl(var(--terminal-red) / 0.6);
+    animation: error-flicker 1s ease-in-out infinite;
+  }
+
+  /* Loading Animation */
+  .loading-dots::after {
+    content: '';
+    animation: loading-hacker 1.2s steps(4, end) infinite;
   }
 
   /* Scanline Effect */
@@ -252,115 +317,56 @@
     top: 0;
     left: -100%;
     width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, hsl(var(--terminal-green)), transparent);
-    animation: scan 3s linear infinite;
+    height: 1px;
+    background: hsl(var(--terminal-green));
+    animation: scan 4s linear infinite;
+    box-shadow: 0 0 6px hsl(var(--terminal-green));
   }
 
-  /* Typing Animation */
-  .typing-container {
-    border-right: 2px solid hsl(var(--terminal-green));
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  /* Window Buttons */
+  .window-button {
+    @apply w-3 h-3 rounded-none border border-current;
+    transition: var(--transition-glitch);
   }
 
-  /* Button Enhancements */
-  .terminal-button {
-    @apply relative px-4 py-2 rounded-md border border-terminal-green text-terminal-green;
-    background: linear-gradient(135deg, transparent, hsl(var(--terminal-green) / 0.1));
-    transition: var(--transition-bounce);
-    overflow: hidden;
-  }
-
-  .terminal-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, hsl(var(--terminal-green) / 0.2), transparent);
-    transition: left 0.5s;
-  }
-
-  .terminal-button:hover::before {
-    left: 100%;
-  }
-
-  .terminal-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px hsl(var(--terminal-green) / 0.4);
-    text-shadow: 0 0 10px currentColor;
-  }
-
-  /* Loading Animation */
-  .loading-dots::after {
-    content: '...';
-    animation: dots 1.5s steps(4, end) infinite;
-  }
-
-  /* Glitch Effect */
-  .glitch {
-    position: relative;
-    animation: glitch 2s infinite;
-  }
-
-  .glitch::before,
-  .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .glitch::before {
-    animation: glitch-1 0.5s infinite;
-    color: hsl(0 100% 50%);
-    z-index: -1;
-  }
-
-  .glitch::after {
-    animation: glitch-2 0.5s infinite;
-    color: hsl(240 100% 50%);
-    z-index: -2;
+  .window-button:hover {
+    box-shadow: 0 0 8px currentColor;
+    transform: none;
   }
 }
 
-/* Enhanced Keyframes */
+/* Hacker Keyframes */
 @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+@keyframes text-glitch {
+  0%, 100% { transform: translate(0); filter: hue-rotate(0deg); }
+  20% { transform: translate(-1px, 1px); filter: hue-rotate(90deg); }
+  40% { transform: translate(-1px, -1px); filter: hue-rotate(180deg); }
+  60% { transform: translate(1px, 1px); filter: hue-rotate(270deg); }
+  80% { transform: translate(1px, -1px); filter: hue-rotate(360deg); }
 }
 
 @keyframes fall {
-  0% { transform: translateY(-100vh); opacity: 1; }
+  0% { transform: translateY(-100vh); opacity: 0.8; }
   100% { transform: translateY(100vh); opacity: 0; }
 }
 
-@keyframes ascii-pulse {
+@keyframes ascii-glow {
   0%, 100% { 
-    filter: drop-shadow(0 0 10px hsl(var(--terminal-green) / 0.6));
-    transform: scale(1);
+    filter: drop-shadow(0 0 8px hsl(var(--terminal-green) / 0.8));
+    text-shadow: 0 0 10px hsl(var(--terminal-green) / 0.6);
   }
   50% { 
-    filter: drop-shadow(0 0 30px hsl(var(--terminal-green) / 1));
-    transform: scale(1.02);
+    filter: drop-shadow(0 0 15px hsl(var(--terminal-green) / 1));
+    text-shadow: 0 0 20px hsl(var(--terminal-green) / 0.8);
   }
 }
 
@@ -369,31 +375,35 @@
   100% { left: 100%; }
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+@keyframes scan-lines {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
 }
 
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: hsl(var(--terminal-green)); }
+@keyframes pulse-border {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
 }
 
-@keyframes dots {
-  0%, 20% { content: '.'; }
-  40% { content: '..'; }
-  60%, 100% { content: '...'; }
+@keyframes button-scan {
+  0% { background-position: -20px 0; }
+  100% { background-position: 20px 0; }
 }
 
-@keyframes glitch {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
+@keyframes error-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
-@keyframes glitch-1 {
+@keyframes loading-hacker {
+  0% { content: '['; }
+  25% { content: '[='; }
+  50% { content: '[=='; }
+  75% { content: '[==='; }
+  100% { content: '[====]'; }
+}
+
+@keyframes glitch-main {
   0%, 100% { transform: translate(0); }
   20% { transform: translate(-1px, 1px); }
   40% { transform: translate(-1px, -1px); }
@@ -401,10 +411,18 @@
   80% { transform: translate(1px, -1px); }
 }
 
+@keyframes glitch-1 {
+  0%, 100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+  20% { transform: translate(-2px, 0); clip-path: inset(0 0 98% 0); }
+  40% { transform: translate(-2px, 0); clip-path: inset(0 0 95% 0); }
+  60% { transform: translate(2px, 0); clip-path: inset(0 0 90% 0); }
+  80% { transform: translate(2px, 0); clip-path: inset(0 0 85% 0); }
+}
+
 @keyframes glitch-2 {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(1px, -1px); }
-  40% { transform: translate(1px, 1px); }
-  60% { transform: translate(-1px, -1px); }
-  80% { transform: translate(-1px, 1px); }
+  0%, 100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+  20% { transform: translate(2px, 0); clip-path: inset(85% 0 0 0); }
+  40% { transform: translate(2px, 0); clip-path: inset(90% 0 0 0); }
+  60% { transform: translate(-2px, 0); clip-path: inset(95% 0 0 0); }
+  80% { transform: translate(-2px, 0); clip-path: inset(98% 0 0 0); }
 }
