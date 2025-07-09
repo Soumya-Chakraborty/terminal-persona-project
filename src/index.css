@@ -43,12 +43,22 @@
     --terminal-dark: 0 0% 7%;
     --terminal-border: 0 0% 25%;
 
-    /* Gradients */
+    /* Enhanced Gradients */
     --gradient-terminal: linear-gradient(135deg, hsl(var(--terminal-dark)), hsl(0 0% 12%));
-    --gradient-glow: radial-gradient(circle at center, hsl(var(--terminal-green) / 0.1), transparent);
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--terminal-green) / 0.15), transparent);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--terminal-green)), hsl(var(--terminal-green-dim)));
+    --gradient-border: linear-gradient(90deg, transparent, hsl(var(--terminal-green) / 0.3), transparent);
+    --gradient-hover: linear-gradient(135deg, hsl(var(--terminal-green) / 0.1), hsl(var(--terminal-green-dim) / 0.05));
+
+    /* Enhanced Shadows */
+    --shadow-terminal: 0 25px 50px -12px hsl(var(--terminal-green) / 0.25);
+    --shadow-glow: 0 0 40px hsl(var(--terminal-green) / 0.4);
+    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.1);
 
     /* Animations */
     --transition-terminal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     --cursor-blink: 1s infinite;
 
     --radius: 0.5rem;
@@ -121,49 +131,280 @@
   }
 }
 
-/* Terminal-specific utilities */
+/* Enhanced Terminal Utilities */
 @layer utilities {
   .terminal-window {
-    @apply bg-card border border-terminal-border rounded-lg overflow-hidden shadow-xl;
+    @apply bg-card border border-terminal-border rounded-lg overflow-hidden relative;
+    box-shadow: var(--shadow-terminal), var(--shadow-glow);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+  }
+  
+  .terminal-window:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-terminal), 0 0 60px hsl(var(--terminal-green) / 0.6);
   }
   
   .terminal-header {
-    @apply bg-secondary p-3 flex items-center justify-between border-b border-terminal-border;
+    @apply bg-secondary p-3 flex items-center justify-between border-b border-terminal-border relative;
+    background: linear-gradient(135deg, hsl(var(--secondary)), hsl(0 0% 18%));
+  }
+  
+  .terminal-header::before {
+    content: '';
+    @apply absolute inset-0 opacity-30;
+    background: var(--gradient-border);
   }
   
   .terminal-content {
-    @apply p-6 font-mono text-sm leading-relaxed;
+    @apply p-6 font-mono text-sm leading-relaxed relative;
+    background: var(--gradient-terminal);
   }
   
   .terminal-prompt {
-    @apply text-terminal-green;
+    @apply text-terminal-green font-semibold;
+    text-shadow: 0 0 10px hsl(var(--terminal-green) / 0.5);
+    transition: var(--transition-terminal);
+  }
+  
+  .terminal-prompt:hover {
+    text-shadow: 0 0 20px hsl(var(--terminal-green) / 0.8);
+    transform: scale(1.05);
   }
   
   .terminal-text {
     @apply text-terminal-white;
+    transition: var(--transition-terminal);
   }
   
   .terminal-dim {
     @apply text-terminal-gray;
+    transition: var(--transition-terminal);
   }
   
   .cursor-blink {
-    animation: blink var(--cursor-blink) infinite;
+    animation: blink var(--cursor-blink) infinite, pulse 2s ease-in-out infinite;
+    color: hsl(var(--terminal-green));
+    text-shadow: 0 0 10px currentColor;
   }
   
   .terminal-glow {
     background: var(--gradient-glow);
+    animation: float 6s ease-in-out infinite;
   }
   
   .text-gradient-terminal {
-    background: linear-gradient(135deg, hsl(var(--terminal-green)), hsl(var(--terminal-green-dim)));
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  /* Enhanced Interactive Elements */
+  .command-item {
+    @apply transition-all duration-300 cursor-pointer p-2 rounded-md;
+    background: linear-gradient(135deg, transparent, hsl(var(--terminal-green) / 0.05));
+  }
+  
+  .command-item:hover {
+    background: var(--gradient-hover);
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px hsl(var(--terminal-green) / 0.3);
+  }
+
+  /* Matrix Effect */
+  .matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .matrix-char {
+    position: absolute;
+    color: hsl(var(--terminal-green));
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    opacity: 0.7;
+    animation: fall linear infinite;
+  }
+
+  /* Pulse Animation for ASCII Art */
+  .ascii-glow {
+    animation: ascii-pulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px hsl(var(--terminal-green) / 0.6));
+  }
+
+  /* Scanline Effect */
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scanline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--terminal-green)), transparent);
+    animation: scan 3s linear infinite;
+  }
+
+  /* Typing Animation */
+  .typing-container {
+    border-right: 2px solid hsl(var(--terminal-green));
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  /* Button Enhancements */
+  .terminal-button {
+    @apply relative px-4 py-2 rounded-md border border-terminal-green text-terminal-green;
+    background: linear-gradient(135deg, transparent, hsl(var(--terminal-green) / 0.1));
+    transition: var(--transition-bounce);
+    overflow: hidden;
+  }
+
+  .terminal-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--terminal-green) / 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .terminal-button:hover::before {
+    left: 100%;
+  }
+
+  .terminal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px hsl(var(--terminal-green) / 0.4);
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  /* Loading Animation */
+  .loading-dots::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+  }
+
+  /* Glitch Effect */
+  .glitch {
+    position: relative;
+    animation: glitch 2s infinite;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch::before {
+    animation: glitch-1 0.5s infinite;
+    color: hsl(0 100% 50%);
+    z-index: -1;
+  }
+
+  .glitch::after {
+    animation: glitch-2 0.5s infinite;
+    color: hsl(240 100% 50%);
+    z-index: -2;
   }
 }
 
+/* Enhanced Keyframes */
 @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes ascii-pulse {
+  0%, 100% { 
+    filter: drop-shadow(0 0 10px hsl(var(--terminal-green) / 0.6));
+    transform: scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 30px hsl(var(--terminal-green) / 1));
+    transform: scale(1.02);
+  }
+}
+
+@keyframes scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: hsl(var(--terminal-green)); }
+}
+
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(-1px, -1px); }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(1px, -1px); }
+  40% { transform: translate(1px, 1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(-1px, 1px); }
 }
